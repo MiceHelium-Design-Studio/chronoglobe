@@ -1,0 +1,339 @@
+[debug] [2026-04-03T21:34:24.915Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:34:24.918Z] Command:       /usr/local/bin/node /usr/local/bin/firebase login --no-localhost
+[debug] [2026-04-03T21:34:24.918Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:34:24.918Z] Platform:      darwin
+[debug] [2026-04-03T21:34:24.919Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:34:24.919Z] Time:          Sat Apr 04 2026 00:34:24 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:34:24.919Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T21:34:24.921Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] Already logged in as raghidhilal@gmail.com
+[debug] [2026-04-03T21:34:26.188Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-04-03T21:34:26.188Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-04-03T21:35:09.564Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:35:09.567Z] Command:       /usr/local/bin/node /usr/local/bin/firebase projects:list --json
+[debug] [2026-04-03T21:35:09.568Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:35:09.568Z] Platform:      darwin
+[debug] [2026-04-03T21:35:09.568Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:35:09.568Z] Time:          Sat Apr 04 2026 00:35:09 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:35:09.568Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T21:35:09.761Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:35:09.762Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[debug] [2026-04-03T21:35:09.765Z] Checked if tokens are valid: false, expires at: 1770066108942
+[debug] [2026-04-03T21:35:09.765Z] Checked if tokens are valid: false, expires at: 1770066108942
+[debug] [2026-04-03T21:35:09.766Z] > refreshing access token with scopes: []
+[debug] [2026-04-03T21:35:09.768Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-04-03T21:35:09.769Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-04-03T21:35:10.328Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-04-03T21:35:10.328Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-04-03T21:35:10.340Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-04-03T21:35:11.160Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-04-03T21:35:11.161Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] ┌──────────────────────┬──────────────────────┬────────────────┬──────────────────────┐
+│ Project Display Name │ Project ID           │ Project Number │ Resource Location ID │
+├──────────────────────┼──────────────────────┼────────────────┼──────────────────────┤
+│ Drawin               │ drawin-1743264650859 │ 44305955535    │ [Not specified]      │
+├──────────────────────┼──────────────────────┼────────────────┼──────────────────────┤
+│ news project         │ newsproject-1b229    │ 396718308336   │ [Not specified]      │
+├──────────────────────┼──────────────────────┼────────────────┼──────────────────────┤
+│ Vybgo                │ vybgo-c2ee0          │ 836911324936   │ [Not specified]      │
+└──────────────────────┴──────────────────────┴────────────────┴──────────────────────┘
+[info] 
+[info] 3 project(s) total.
+[debug] [2026-04-03T21:35:20.213Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:35:20.215Z] Command:       /usr/local/bin/node /usr/local/bin/firebase use newsproject-1b229
+[debug] [2026-04-03T21:35:20.216Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:35:20.216Z] Platform:      darwin
+[debug] [2026-04-03T21:35:20.216Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:35:20.216Z] Time:          Sat Apr 04 2026 00:35:20 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:35:20.216Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T21:35:20.404Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:35:20.405Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[debug] [2026-04-03T21:35:20.407Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:35:20.407Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:35:20.408Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-04-03T21:35:20.409Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/cloudresourcemanager.googleapis.com  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:35:21.659Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/cloudresourcemanager.googleapis.com 200
+[debug] [2026-04-03T21:35:21.660Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-04-03T21:35:21.666Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:35:21.666Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:35:21.666Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229 [none]
+[debug] [2026-04-03T21:35:22.800Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229 200
+[debug] [2026-04-03T21:35:22.800Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229 {"projectNumber":"396718308336","projectId":"newsproject-1b229","lifecycleState":"ACTIVE","name":"news project","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-04-01T22:29:22.364Z"}
+[info] Now using project newsproject-1b229
+[debug] [2026-04-03T21:35:35.076Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:35:35.079Z] Command:       /usr/local/bin/node /usr/local/bin/firebase use
+[debug] [2026-04-03T21:35:35.080Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:35:35.080Z] Platform:      darwin
+[debug] [2026-04-03T21:35:35.080Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:35:35.080Z] Time:          Sat Apr 04 2026 00:35:35 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:35:35.080Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T21:35:35.290Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:35:35.292Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[info] newsproject-1b229
+[debug] [2026-04-03T21:36:01.067Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:36:01.089Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2026-04-03T21:36:01.090Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:36:01.090Z] Platform:      darwin
+[debug] [2026-04-03T21:36:01.090Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:36:01.090Z] Time:          Sat Apr 04 2026 00:36:01 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:36:01.090Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/gee/Desktop/new concept/myapp
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-04-03T21:36:12.611Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:36:12.612Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[debug] [2026-04-03T21:36:12.613Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:12.613Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:12.620Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 [none]
+[debug] [2026-04-03T21:36:13.219Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 200
+[debug] [2026-04-03T21:36:13.219Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 {"projectId":"newsproject-1b229","projectNumber":"396718308336","displayName":"news project","name":"projects/newsproject-1b229","resources":{"hostingSite":"newsproject-1b229"},"state":"ACTIVE","etag":"1_93e3d9a9-997c-432b-ba79-91ec5e6dad7d"}
+[info] i  Using project newsproject-1b229 (news project) . 
+[info] 
+=== Dataconnect Setup
+[info] i  dataconnect: ensuring required API firebasedataconnect.googleapis.com is enabled... 
+[debug] [2026-04-03T21:36:13.233Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:13.233Z] Checked if tokens are valid: true, expires at: 1775255709328
+[info] i  dataconnect: ensuring required API sqladmin.googleapis.com is enabled... 
+[debug] [2026-04-03T21:36:13.234Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:13.234Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:13.234Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com [none]
+[debug] [2026-04-03T21:36:13.234Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:13.236Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com [none]
+[debug] [2026-04-03T21:36:13.236Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:14.333Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com 200
+[debug] [2026-04-03T21:36:14.333Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com [omitted]
+[warn] ⚠  dataconnect: missing required API firebasedataconnect.googleapis.com. Enabling now... 
+[debug] [2026-04-03T21:36:14.334Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:14.334Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:14.334Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com:enable [none]
+[debug] [2026-04-03T21:36:14.334Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com:enable  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:14.337Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com 200
+[debug] [2026-04-03T21:36:14.337Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com [omitted]
+[warn] ⚠  dataconnect: missing required API sqladmin.googleapis.com. Enabling now... 
+[debug] [2026-04-03T21:36:14.337Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:14.337Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:14.337Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com:enable [none]
+[debug] [2026-04-03T21:36:14.337Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com:enable  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:15.426Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com:enable 200
+[debug] [2026-04-03T21:36:15.426Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firebasedataconnect.googleapis.com:enable [omitted]
+[debug] [2026-04-03T21:36:15.539Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com:enable 200
+[debug] [2026-04-03T21:36:15.539Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/sqladmin.googleapis.com:enable [omitted]
+[debug] [2026-04-03T21:36:28.749Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:36:28.752Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init firestore --project newsproject-1b229
+[debug] [2026-04-03T21:36:28.752Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:36:28.752Z] Platform:      darwin
+[debug] [2026-04-03T21:36:28.752Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:36:28.752Z] Time:          Sat Apr 04 2026 00:36:28 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:36:28.753Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/gee/Desktop/new concept/myapp
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-04-03T21:36:29.918Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:36:29.919Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[debug] [2026-04-03T21:36:29.921Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:29.922Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:29.925Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 [none]
+[debug] [2026-04-03T21:36:30.794Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 200
+[debug] [2026-04-03T21:36:30.794Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/newsproject-1b229 {"projectId":"newsproject-1b229","projectNumber":"396718308336","displayName":"news project","name":"projects/newsproject-1b229","resources":{"hostingSite":"newsproject-1b229"},"state":"ACTIVE","etag":"1_93e3d9a9-997c-432b-ba79-91ec5e6dad7d"}
+[info] i  Using project newsproject-1b229 (news project) . 
+[info] 
+=== Firestore Setup
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2026-04-03T21:36:30.806Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:30.806Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:30.806Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com [none]
+[debug] [2026-04-03T21:36:30.806Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:31.897Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com 200
+[debug] [2026-04-03T21:36:31.898Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com [omitted]
+[warn] ⚠  firestore: missing required API firestore.googleapis.com. Enabling now... 
+[debug] [2026-04-03T21:36:31.898Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:31.898Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:31.899Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com:enable [none]
+[debug] [2026-04-03T21:36:31.899Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com:enable  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:36:32.606Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com:enable 200
+[debug] [2026-04-03T21:36:32.606Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/newsproject-1b229/services/firestore.googleapis.com:enable [omitted]
+[debug] [2026-04-03T21:36:42.625Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:42.626Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:42.627Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases [none]
+[debug] [2026-04-03T21:36:43.700Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases 200
+[debug] [2026-04-03T21:36:43.700Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases {}
+[debug] [2026-04-03T21:36:43.701Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:43.701Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:43.701Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/locations [none]
+[debug] [2026-04-03T21:36:43.982Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/locations 200
+[debug] [2026-04-03T21:36:43.982Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/locations {"locations":[{"name":"projects/newsproject-1b229/locations/eur3","labels":{"appengine.googleapis.com/geo":"europe-west","cloud.googleapis.com/location":"eur3","cloud.googleapis.com/geo":"eur3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"eur3","displayName":"Europe"},{"name":"projects/newsproject-1b229/locations/nam5","labels":{"appengine.googleapis.com/geo":"us-central","cloud.googleapis.com/location":"nam5","cloud.googleapis.com/geo":"nam5"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"nam5","displayName":"United States"},{"name":"projects/newsproject-1b229/locations/nam7","labels":{"cloud.googleapis.com/location":"nam7","cloud.googleapis.com/geo":"nam7"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"nam7","displayName":"United States"},{"name":"projects/newsproject-1b229/locations/africa-south1","labels":{"cloud.googleapis.com/location":"africa-south1","cloud.googleapis.com/region":"africa-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"africa-south1","displayName":"Johannesburg"},{"name":"projects/newsproject-1b229/locations/asia-east1","labels":{"appengine.googleapis.com/region":"asia-east1","cloud.googleapis.com/location":"asia-east1","cloud.googleapis.com/region":"asia-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-east1","displayName":"Taiwan"},{"name":"projects/newsproject-1b229/locations/asia-east2","labels":{"appengine.googleapis.com/region":"asia-east2","cloud.googleapis.com/location":"asia-east2","cloud.googleapis.com/region":"asia-east2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-east2","displayName":"Hong Kong"},{"name":"projects/newsproject-1b229/locations/asia-northeast1","labels":{"appengine.googleapis.com/region":"asia-northeast1","cloud.googleapis.com/location":"asia-northeast1","cloud.googleapis.com/region":"asia-northeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast1","displayName":"Tokyo"},{"name":"projects/newsproject-1b229/locations/asia-northeast2","labels":{"appengine.googleapis.com/region":"asia-northeast2","cloud.googleapis.com/location":"asia-northeast2","cloud.googleapis.com/region":"asia-northeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast2","displayName":"Osaka"},{"name":"projects/newsproject-1b229/locations/asia-northeast3","labels":{"appengine.googleapis.com/region":"asia-northeast3","cloud.googleapis.com/location":"asia-northeast3","cloud.googleapis.com/region":"asia-northeast3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-northeast3","displayName":"Seoul"},{"name":"projects/newsproject-1b229/locations/asia-south1","labels":{"appengine.googleapis.com/region":"asia-south1","cloud.googleapis.com/location":"asia-south1","cloud.googleapis.com/region":"asia-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-south1","displayName":"Mumbai"},{"name":"projects/newsproject-1b229/locations/asia-south2","labels":{"cloud.googleapis.com/location":"asia-south2","cloud.googleapis.com/region":"asia-south2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-south2","displayName":"Delhi"},{"name":"projects/newsproject-1b229/locations/asia-southeast1","labels":{"appengine.googleapis.com/region":"asia-southeast1","cloud.googleapis.com/location":"asia-southeast1","cloud.googleapis.com/region":"asia-southeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-southeast1","displayName":"Singapore"},{"name":"projects/newsproject-1b229/locations/asia-southeast2","labels":{"appengine.googleapis.com/region":"asia-southeast2","cloud.googleapis.com/location":"asia-southeast2","cloud.googleapis.com/region":"asia-southeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-southeast2","displayName":"Jakarta"},{"name":"projects/newsproject-1b229/locations/asia-southeast3","labels":{"cloud.googleapis.com/location":"asia-southeast3","cloud.googleapis.com/region":"asia-southeast3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"asia-southeast3","displayName":"Bangkok"},{"name":"projects/newsproject-1b229/locations/australia-southeast1","labels":{"appengine.googleapis.com/region":"australia-southeast1","cloud.googleapis.com/location":"australia-southeast1","cloud.googleapis.com/region":"australia-southeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"australia-southeast1","displayName":"Sydney"},{"name":"projects/newsproject-1b229/locations/australia-southeast2","labels":{"cloud.googleapis.com/location":"australia-southeast2","cloud.googleapis.com/region":"australia-southeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"australia-southeast2","displayName":"Melbourne"},{"name":"projects/newsproject-1b229/locations/europe-central2","labels":{"appengine.googleapis.com/region":"europe-central2","cloud.googleapis.com/location":"europe-central2","cloud.googleapis.com/region":"europe-central2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-central2","displayName":"Warsaw"},{"name":"projects/newsproject-1b229/locations/europe-north1","labels":{"cloud.googleapis.com/location":"europe-north1","cloud.googleapis.com/region":"europe-north1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-north1","displayName":"Finland"},{"name":"projects/newsproject-1b229/locations/europe-north2","labels":{"cloud.googleapis.com/location":"europe-north2","cloud.googleapis.com/region":"europe-north2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-north2","displayName":"Stockholm"},{"name":"projects/newsproject-1b229/locations/europe-southwest1","labels":{"cloud.googleapis.com/location":"europe-southwest1","cloud.googleapis.com/region":"europe-southwest1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-southwest1","displayName":"Madrid"},{"name":"projects/newsproject-1b229/locations/europe-west1","labels":{"cloud.googleapis.com/location":"europe-west1","cloud.googleapis.com/region":"europe-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west1","displayName":"Belgium"},{"name":"projects/newsproject-1b229/locations/europe-west10","labels":{"cloud.googleapis.com/location":"europe-west10","cloud.googleapis.com/region":"europe-west10"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west10","displayName":"Berlin"},{"name":"projects/newsproject-1b229/locations/europe-west12","labels":{"cloud.googleapis.com/location":"europe-west12","cloud.googleapis.com/region":"europe-west12"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west12","displayName":"Turin"},{"name":"projects/newsproject-1b229/locations/europe-west2","labels":{"appengine.googleapis.com/region":"europe-west2","cloud.googleapis.com/location":"europe-west2","cloud.googleapis.com/region":"europe-west2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west2","displayName":"London"},{"name":"projects/newsproject-1b229/locations/europe-west3","labels":{"appengine.googleapis.com/region":"europe-west3","cloud.googleapis.com/location":"europe-west3","cloud.googleapis.com/region":"europe-west3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west3","displayName":"Frankfurt"},{"name":"projects/newsproject-1b229/locations/europe-west4","labels":{"cloud.googleapis.com/location":"europe-west4","cloud.googleapis.com/region":"europe-west4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west4","displayName":"Netherlands"},{"name":"projects/newsproject-1b229/locations/europe-west6","labels":{"appengine.googleapis.com/region":"europe-west6","cloud.googleapis.com/location":"europe-west6","cloud.googleapis.com/region":"europe-west6"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west6","displayName":"Zurich"},{"name":"projects/newsproject-1b229/locations/europe-west8","labels":{"cloud.googleapis.com/location":"europe-west8","cloud.googleapis.com/region":"europe-west8"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west8","displayName":"Milan"},{"name":"projects/newsproject-1b229/locations/europe-west9","labels":{"cloud.googleapis.com/location":"europe-west9","cloud.googleapis.com/region":"europe-west9"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"europe-west9","displayName":"Paris"},{"name":"projects/newsproject-1b229/locations/me-central1","labels":{"cloud.googleapis.com/location":"me-central1","cloud.googleapis.com/region":"me-central1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-central1","displayName":"Doha"},{"name":"projects/newsproject-1b229/locations/me-central2","labels":{"cloud.googleapis.com/location":"me-central2","cloud.googleapis.com/region":"me-central2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-central2","displayName":"Dammam"},{"name":"projects/newsproject-1b229/locations/me-west1","labels":{"cloud.googleapis.com/location":"me-west1","cloud.googleapis.com/region":"me-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"me-west1","displayName":"Tel Aviv"},{"name":"projects/newsproject-1b229/locations/northamerica-northeast1","labels":{"appengine.googleapis.com/region":"northamerica-northeast1","cloud.googleapis.com/location":"northamerica-northeast1","cloud.googleapis.com/region":"northamerica-northeast1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-northeast1","displayName":"Montréal"},{"name":"projects/newsproject-1b229/locations/northamerica-northeast2","labels":{"cloud.googleapis.com/location":"northamerica-northeast2","cloud.googleapis.com/region":"northamerica-northeast2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-northeast2","displayName":"Toronto"},{"name":"projects/newsproject-1b229/locations/northamerica-south1","labels":{"cloud.googleapis.com/location":"northamerica-south1","cloud.googleapis.com/region":"northamerica-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"northamerica-south1","displayName":"Mexico"},{"name":"projects/newsproject-1b229/locations/southamerica-east1","labels":{"appengine.googleapis.com/region":"southamerica-east1","cloud.googleapis.com/location":"southamerica-east1","cloud.googleapis.com/region":"southamerica-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"southamerica-east1","displayName":"São Paulo"},{"name":"projects/newsproject-1b229/locations/southamerica-west1","labels":{"cloud.googleapis.com/location":"southamerica-west1","cloud.googleapis.com/region":"southamerica-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"southamerica-west1","displayName":"Santiago"},{"name":"projects/newsproject-1b229/locations/us-central1","labels":{"cloud.googleapis.com/location":"us-central1","cloud.googleapis.com/region":"us-central1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-central1","displayName":"Iowa"},{"name":"projects/newsproject-1b229/locations/us-east1","labels":{"appengine.googleapis.com/region":"us-east1","cloud.googleapis.com/location":"us-east1","cloud.googleapis.com/region":"us-east1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east1","displayName":"South Carolina"},{"name":"projects/newsproject-1b229/locations/us-east4","labels":{"appengine.googleapis.com/region":"us-east4","cloud.googleapis.com/location":"us-east4","cloud.googleapis.com/region":"us-east4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east4","displayName":"Northern Virginia"},{"name":"projects/newsproject-1b229/locations/us-east5","labels":{"cloud.googleapis.com/location":"us-east5","cloud.googleapis.com/region":"us-east5"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-east5","displayName":"Columbus"},{"name":"projects/newsproject-1b229/locations/us-south1","labels":{"cloud.googleapis.com/location":"us-south1","cloud.googleapis.com/region":"us-south1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-south1","displayName":"Dallas"},{"name":"projects/newsproject-1b229/locations/us-west1","labels":{"appengine.googleapis.com/region":"us-west1","cloud.googleapis.com/location":"us-west1","cloud.googleapis.com/region":"us-west1"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west1","displayName":"Oregon"},{"name":"projects/newsproject-1b229/locations/us-west2","labels":{"appengine.googleapis.com/region":"us-west2","cloud.googleapis.com/location":"us-west2","cloud.googleapis.com/region":"us-west2"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west2","displayName":"Los Angeles"},{"name":"projects/newsproject-1b229/locations/us-west3","labels":{"appengine.googleapis.com/region":"us-west3","cloud.googleapis.com/location":"us-west3","cloud.googleapis.com/region":"us-west3"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west3","displayName":"Salt Lake City"},{"name":"projects/newsproject-1b229/locations/us-west4","labels":{"appengine.googleapis.com/region":"us-west4","cloud.googleapis.com/location":"us-west4","cloud.googleapis.com/region":"us-west4"},"metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.LocationMetadata"},"locationId":"us-west4","displayName":"Las Vegas"}]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2026-04-03T21:36:49.011Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:49.012Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:49.012Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases pageSize=10&pageToken=
+[debug] [2026-04-03T21:36:51.059Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases 200
+[debug] [2026-04-03T21:36:51.059Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases {}
+[info] i  Skipping write of firestore.rules 
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2026-04-03T21:36:54.452Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:54.453Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:54.453Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:54.453Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:36:54.453Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2026-04-03T21:36:54.455Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2026-04-03T21:36:55.368Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 404
+[debug] [2026-04-03T21:36:55.368Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"error":{"code":404,"message":"Project 'newsproject-1b229' or database '(default)' does not exist.","status":"NOT_FOUND"}}
+[debug] [2026-04-03T21:36:55.371Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes 404
+[debug] [2026-04-03T21:36:55.371Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes {"error":{"code":404,"message":"Project 'newsproject-1b229' or database '(default)' does not exist.","status":"NOT_FOUND"}}
+[info] i  Skipping write of firestore.indexes.json 
+[info] 
+[info] ✔  Wrote configuration info to firebase.json 
+[info] ✔  Wrote project information to .firebaserc 
+[info] 
+[info] ✔  Firebase initialization complete! 
+[debug] [2026-04-03T21:37:28.375Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T21:37:28.378Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2026-04-03T21:37:28.378Z] CLI Version:   15.5.1
+[debug] [2026-04-03T21:37:28.378Z] Platform:      darwin
+[debug] [2026-04-03T21:37:28.378Z] Node Version:  v20.11.0
+[debug] [2026-04-03T21:37:28.379Z] Time:          Sat Apr 04 2026 00:37:28 GMT+0300 (Eastern European Summer Time)
+[debug] [2026-04-03T21:37:28.379Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T21:37:29.640Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T21:37:29.641Z] > authorizing via signed-in user (raghidhilal@gmail.com)
+[debug] [2026-04-03T21:37:29.642Z] [iam] checking project newsproject-1b229 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
+[debug] [2026-04-03T21:37:29.643Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:29.643Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:29.646Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229:testIamPermissions [none]
+[debug] [2026-04-03T21:37:29.646Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229:testIamPermissions  x-goog-user-project=newsproject-1b229
+[debug] [2026-04-03T21:37:29.646Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[debug] [2026-04-03T21:37:31.019Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229:testIamPermissions 200
+[debug] [2026-04-03T21:37:31.020Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/newsproject-1b229:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[info] 
+[info] === Deploying to 'newsproject-1b229'...
+[info] 
+[info] i  deploying firestore 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2026-04-03T21:37:31.023Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:31.023Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:31.023Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) [none]
+[debug] [2026-04-03T21:37:31.926Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) 404
+[debug] [2026-04-03T21:37:31.927Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) {"error":{"code":404,"message":"Project 'newsproject-1b229' or database '(default)' does not exist.","status":"NOT_FOUND"}}
+[info] i  firestore: Creating the new Firestore database (default)... 
+[debug] [2026-04-03T21:37:31.929Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:31.929Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:31.930Z] >>> [apiv2][query] POST https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases databaseId=%28default%29
+[debug] [2026-04-03T21:37:31.930Z] >>> [apiv2][body] POST https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases {"locationId":"eur3","type":"FIRESTORE_NATIVE","databaseEdition":"STANDARD","deleteProtectionState":"DELETE_PROTECTION_DISABLED","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED"}
+[debug] [2026-04-03T21:37:42.373Z] <<< [apiv2][status] POST https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases 200
+[debug] [2026-04-03T21:37:42.373Z] <<< [apiv2][body] POST https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases {"name":"projects/newsproject-1b229/databases/(default)/operations/s1rqt0rFPboySoMpcKTvZBAqM3J1ZQQiBRADwOmzuBAGzsDmpQgMCiga","metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.CreateDatabaseMetadata"},"done":true,"response":{"@type":"type.googleapis.com/google.firestore.admin.v1.Database","name":"projects/newsproject-1b229/databases/(default)","uid":"64efa470-2983-4a32-ba3d-c54ab7ea5ab3","createTime":"2026-04-03T21:37:41.941251Z","updateTime":"2026-04-03T21:37:41.941251Z","locationId":"eur3","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-04-03T21:37:41.941251Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"e","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"INLz14PS0pMDMIPg1oPS0pMD"}}
+[debug] [2026-04-03T21:37:42.374Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:42.374Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:42.374Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/operations/s1rqt0rFPboySoMpcKTvZBAqM3J1ZQQiBRADwOmzuBAGzsDmpQgMCiga [none]
+[debug] [2026-04-03T21:37:42.525Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/operations/s1rqt0rFPboySoMpcKTvZBAqM3J1ZQQiBRADwOmzuBAGzsDmpQgMCiga 200
+[debug] [2026-04-03T21:37:42.525Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/operations/s1rqt0rFPboySoMpcKTvZBAqM3J1ZQQiBRADwOmzuBAGzsDmpQgMCiga {"name":"projects/newsproject-1b229/databases/(default)/operations/s1rqt0rFPboySoMpcKTvZBAqM3J1ZQQiBRADwOmzuBAGzsDmpQgMCiga","metadata":{"@type":"type.googleapis.com/google.firestore.admin.v1.CreateDatabaseMetadata"},"done":true,"response":{"@type":"type.googleapis.com/google.firestore.admin.v1.Database","name":"projects/newsproject-1b229/databases/(default)","uid":"64efa470-2983-4a32-ba3d-c54ab7ea5ab3","createTime":"2026-04-03T21:37:41.941251Z","updateTime":"2026-04-03T21:37:41.941251Z","locationId":"eur3","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-04-03T21:37:41.941251Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"e","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IPXMgITS0pMDMIPg1oPS0pMD"}}
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2026-04-03T21:37:42.528Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:42.528Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:42.528Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229:test [none]
+[debug] [2026-04-03T21:37:42.528Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229:test [omitted]
+[debug] [2026-04-03T21:37:43.633Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229:test 200
+[debug] [2026-04-03T21:37:43.633Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229:test {}
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2026-04-03T21:37:43.634Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:43.635Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:43.635Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases pageSize=10&pageToken=
+[debug] [2026-04-03T21:37:44.622Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases 200
+[debug] [2026-04-03T21:37:44.622Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases {}
+[info] i  firestore: uploading rules firestore.rules... 
+[debug] [2026-04-03T21:37:44.622Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:44.622Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:44.622Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/rulesets [none]
+[debug] [2026-04-03T21:37:44.623Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/rulesets [omitted]
+[debug] [2026-04-03T21:37:45.749Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/rulesets 200
+[debug] [2026-04-03T21:37:45.749Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/rulesets {"name":"projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0","source":{"files":[{"content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function isSignedIn() {\n      return request.auth != null;\n    }\n\n    function isOwner(uid) {\n      return isSignedIn() && request.auth.uid == uid;\n    }\n\n    function billingAbsentOnCreate() {\n      return !('billing' in request.resource.data);\n    }\n\n    function billingUnchangedOnUpdate() {\n      return !request.resource.data.diff(resource.data).changedKeys().hasAny(['billing']);\n    }\n\n    function notificationReadReceiptOnly() {\n      return request.resource.data.diff(resource.data).changedKeys().hasOnly(['readAt']) &&\n        (\n          request.resource.data.readAt == null ||\n          request.resource.data.readAt is string\n        );\n    }\n\n    match /users/{uid} {\n      allow read: if isOwner(uid);\n      allow create: if isOwner(uid) && billingAbsentOnCreate();\n      allow update: if isOwner(uid) && billingUnchangedOnUpdate();\n      allow delete: if false;\n\n      match /notifications/{notificationId} {\n        allow read: if isOwner(uid);\n        allow update: if isOwner(uid) && notificationReadReceiptOnly();\n        allow create, delete: if false;\n      }\n    }\n\n    match /{document=**} {\n      allow read, write: if false;\n    }\n  }\n}\n","name":"firestore.rules"}]},"createTime":"2026-04-03T21:37:45.535218Z","metadata":{"services":["cloud.firestore"]}}
+[debug] [2026-04-03T21:37:45.749Z] [rules] created ruleset projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0
+[info] i  firestore: deploying indexes... 
+[debug] [2026-04-03T21:37:45.750Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:45.750Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:45.750Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2026-04-03T21:37:46.377Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2026-04-03T21:37:46.378Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/indexes {}
+[debug] [2026-04-03T21:37:46.378Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:46.378Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:46.378Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2026-04-03T21:37:47.562Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2026-04-03T21:37:47.562Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/newsproject-1b229/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[debug] [2026-04-03T21:37:47.562Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:47.563Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:47.563Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) [none]
+[debug] [2026-04-03T21:37:47.722Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) 200
+[debug] [2026-04-03T21:37:47.722Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/newsproject-1b229/databases/(default) {"name":"projects/newsproject-1b229/databases/(default)","uid":"64efa470-2983-4a32-ba3d-c54ab7ea5ab3","createTime":"2026-04-03T21:37:41.941251Z","updateTime":"2026-04-03T21:37:41.941251Z","locationId":"eur3","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-04-03T21:37:41.941251Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"e","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IJf9vYbS0pMDMPz0k4bS0pMD"}
+[info] ✔  firestore: deployed indexes in firestore.indexes.json successfully for (default) database 
+[debug] [2026-04-03T21:37:47.723Z] [rules] releasing cloud.firestore/(default) with ruleset projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0
+[debug] [2026-04-03T21:37:47.723Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:47.723Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:47.724Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases/cloud.firestore/(default) [none]
+[debug] [2026-04-03T21:37:47.724Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases/cloud.firestore/(default) {"release":{"name":"projects/newsproject-1b229/releases/cloud.firestore/(default)","rulesetName":"projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0"}}
+[debug] [2026-04-03T21:37:48.515Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases/cloud.firestore/(default) 404
+[debug] [2026-04-03T21:37:48.516Z] <<< [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases/cloud.firestore/(default) {"error":{"code":404,"message":"Requested entity was not found.","status":"NOT_FOUND"}}
+[debug] [2026-04-03T21:37:48.516Z] [rules] ruleset update failed, attempting to create instead
+[debug] [2026-04-03T21:37:48.516Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:48.516Z] Checked if tokens are valid: true, expires at: 1775255709328
+[debug] [2026-04-03T21:37:48.517Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases [none]
+[debug] [2026-04-03T21:37:48.517Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases {"name":"projects/newsproject-1b229/releases/cloud.firestore/(default)","rulesetName":"projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0"}
+[debug] [2026-04-03T21:37:49.436Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases 200
+[debug] [2026-04-03T21:37:49.436Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/newsproject-1b229/releases {"name":"projects/newsproject-1b229/releases/cloud.firestore","rulesetName":"projects/newsproject-1b229/rulesets/c44fa5c7-4975-4954-93aa-d12d90b20ca0","createTime":"2026-04-03T21:37:49.123536Z","updateTime":"2026-04-03T21:37:49.123536Z"}
+[debug] [2026-04-03T21:37:49.436Z] [rules] created release projects/newsproject-1b229/releases/cloud.firestore
+[info] ✔  firestore: released rules firestore.rules to cloud.firestore 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/newsproject-1b229/overview

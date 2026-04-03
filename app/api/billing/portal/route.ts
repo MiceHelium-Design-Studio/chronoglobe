@@ -10,10 +10,6 @@ import { ApiAuthError, requireAuthenticatedUser } from '../../../../lib/serverAu
 import { createBillingPortalSession } from '../../../../lib/billing/stripeBillingService';
 import { BillingPortalResponse } from '../../../../types/billing';
 
-validateBillingEnv();
-validateGeneralAppEnv();
-validateFirebaseAdminEnv();
-
 const ROUTE = '/api/billing/portal';
 export const runtime = 'nodejs';
 
@@ -31,6 +27,10 @@ export async function POST(request: NextRequest) {
   const requestId = getRequestId(request);
 
   try {
+    validateBillingEnv();
+    validateGeneralAppEnv();
+    validateFirebaseAdminEnv();
+
     const user = await requireAuthenticatedUser(request);
     const session = await createBillingPortalSession({
       uid: user.uid,

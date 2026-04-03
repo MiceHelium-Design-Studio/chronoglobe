@@ -26,9 +26,6 @@ import {
 
 export const runtime = 'nodejs';
 
-validateBillingEnv();
-validateFirebaseAdminEnv();
-
 const ROUTE = '/api/billing/webhook';
 
 interface WebhookHandlerResult {
@@ -316,6 +313,9 @@ export async function POST(request: NextRequest) {
   let processingEventId: string | null = null;
 
   try {
+    validateBillingEnv();
+    validateFirebaseAdminEnv();
+
     const signature = request.headers.get('stripe-signature');
     if (!signature) {
       return NextResponse.json(

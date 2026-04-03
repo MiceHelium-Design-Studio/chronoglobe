@@ -10,10 +10,6 @@ import { ApiAuthError, requireAuthenticatedUser } from '../../../../lib/serverAu
 import { createCheckoutSession } from '../../../../lib/billing/stripeBillingService';
 import { BillingCheckoutRequest, BillingCheckoutResponse, PaidPlan } from '../../../../types/billing';
 
-validateBillingEnv();
-validateGeneralAppEnv();
-validateFirebaseAdminEnv();
-
 const ROUTE = '/api/billing/checkout';
 export const runtime = 'nodejs';
 
@@ -49,6 +45,10 @@ export async function POST(request: NextRequest) {
   const requestId = getRequestId(request);
 
   try {
+    validateBillingEnv();
+    validateGeneralAppEnv();
+    validateFirebaseAdminEnv();
+
     const user = await requireAuthenticatedUser(request);
     const body = await readRequestBody(request);
     const session = await createCheckoutSession({

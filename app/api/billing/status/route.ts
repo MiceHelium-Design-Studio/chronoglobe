@@ -6,8 +6,6 @@ import { ApiAuthError, requireAuthenticatedUser } from '../../../../lib/serverAu
 import { BillingStatusResponse } from '../../../../types/billing';
 import { getUserBillingByUid } from '../../../../lib/billing/billingState';
 
-validateFirebaseAdminEnv();
-
 const ROUTE = '/api/billing/status';
 export const runtime = 'nodejs';
 
@@ -25,6 +23,8 @@ export async function GET(request: NextRequest) {
   const requestId = getRequestId(request);
 
   try {
+    validateFirebaseAdminEnv();
+
     const user = await requireAuthenticatedUser(request);
     const billing = await getUserBillingByUid(user.uid);
     const response: BillingStatusResponse = { billing };

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { AppHeader } from '../../components/layout/AppHeader';
-import { auth } from '../../lib/firebase';
+import { auth, getFirebaseInitializationError } from '../../lib/firebase';
 import { useAnalytics } from '../../hooks/useAnalytics';
 import { reportAuthError } from '../../lib/errorTracking';
 
@@ -21,6 +21,15 @@ export default function Signup() {
     event.preventDefault();
     setSubmitting(true);
     setError(null);
+
+    if (!auth) {
+      const initializationError = getFirebaseInitializationError();
+      setError(
+        initializationError?.message ?? 'Authentication is unavailable right now.',
+      );
+      setSubmitting(false);
+      return;
+    }
 
     try {
       const credential = await createUserWithEmailAndPassword(auth, email, password);

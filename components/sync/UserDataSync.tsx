@@ -31,6 +31,7 @@ import {
 } from '../../services/userDataService';
 import { fetchBillingStatus } from '../../services/billingClient';
 import { reportClientError } from '../../lib/errorTracking';
+import { getFirebaseInitializationError } from '../../lib/firebase';
 import { PersistableUserData, UserProfile } from '../../types/userData';
 
 function toSyncSnapshot(payload: PersistableUserData): string {
@@ -62,21 +63,28 @@ export function UserDataSync() {
       return;
     }
 
-    const localBookmarks = loadLocalBookmarks();
-    const localMarkers = loadLocalMarkers();
-    const localPreferences = loadLocalPreferences(preferences);
-    const localWatchlist = loadLocalWatchlist(localPreferences.followedTopics);
+    try {
+      const localBookmarks = loadLocalBookmarks();
+      const localMarkers = loadLocalMarkers();
+      const localPreferences = loadLocalPreferences(preferences);
+      const localWatchlist = loadLocalWatchlist(localPreferences.followedTopics);
 
-    dispatch(hydrateBookmarks(localBookmarks));
-    dispatch(hydrateMarkers(localMarkers));
-    dispatch(hydratePreferences(localPreferences));
-    dispatch(
-      hydrateWatchlist({
-        followedTopics: localPreferences.followedTopics,
-        followedRegions: localWatchlist.followedRegions,
-        alerts: localWatchlist.alerts,
-      }),
-    );
+      dispatch(hydrateBookmarks(localBookmarks));
+      dispatch(hydrateMarkers(localMarkers));
+      dispatch(hydratePreferences(localPreferences));
+      dispatch(
+        hydrateWatchlist({
+          followedTopics: localPreferences.followedTopics,
+          followedRegions: localWatchlist.followedRegions,
+          alerts: localWatchlist.alerts,
+        }),
+      );
+    } catch (error) {
+      reportClientError(error, {
+        area: 'user_data_sync',
+        phase: 'local_hydrate',
+      });
+    }
 
     localHydratedRef.current = true;
   }, [dispatch, preferences]);
@@ -86,14 +94,21 @@ export function UserDataSync() {
       return;
     }
 
-    saveLocalBookmarks(bookmarks);
-    saveLocalMarkers(markers);
-    saveLocalPreferences(preferences);
-    saveLocalWatchlist({
-      followedTopics: preferences.followedTopics,
-      followedRegions: watchlist.followedRegions,
-      alerts: watchlist.alerts,
-    });
+    try {
+      saveLocalBookmarks(bookmarks);
+      saveLocalMarkers(markers);
+      saveLocalPreferences(preferences);
+      saveLocalWatchlist({
+        followedTopics: preferences.followedTopics,
+        followedRegions: watchlist.followedRegions,
+        alerts: watchlist.alerts,
+      });
+    } catch (error) {
+      reportClientError(error, {
+        area: 'user_data_sync',
+        phase: 'local_persist',
+      });
+    }
   }, [bookmarks, markers, preferences, watchlist]);
 
   useEffect(() => {
@@ -111,6 +126,14 @@ export function UserDataSync() {
     }
 
     if (activeUidRef.current === user.uid || loadingUidRef.current === user.uid) {
+      return;
+    }
+
+    const firebaseInitializationError = getFirebaseInitializationError();
+    if (firebaseInitializationError) {
+      activeUidRef.current = user.uid;
+      loadingUidRef.current = null;
+      dispatch(setSyncError(firebaseInitializationError.message));
       return;
     }
 
@@ -209,6 +232,11 @@ export function UserDataSync() {
 
   useEffect(() => {
     if (!user || activeUidRef.current !== user.uid || loadingUidRef.current === user.uid) {
+      return;
+    }
+
+    const firebaseInitializationError = getFirebaseInitializationError();
+    if (firebaseInitializationError) {
       return;
     }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { auth } from '../lib/firebase';
+import { auth, getFirebaseInitializationError } from '../lib/firebase';
 import {
   BillingCheckoutRequest,
   BillingCheckoutResponse,
@@ -20,6 +20,14 @@ class BillingClientError extends Error {
 }
 
 async function getAuthToken(): Promise<string> {
+  if (!auth) {
+    const initializationError = getFirebaseInitializationError();
+    throw new BillingClientError(
+      initializationError?.message ?? 'Billing is unavailable right now.',
+      500,
+    );
+  }
+
   const user = auth.currentUser;
 
   if (!user) {

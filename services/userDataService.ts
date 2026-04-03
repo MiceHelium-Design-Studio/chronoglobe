@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { createDefaultBilling } from '../lib/entitlements';
-import { db } from '../lib/firebase';
+import { db, getFirebaseInitializationError } from '../lib/firebase';
 import { SavedLocation } from '../types/map';
 import { NewsArticle } from '../types/news';
 import {
@@ -36,6 +36,18 @@ const MAX_PERSIST_RETRIES = 2;
 
 const categorySet = new Set<SupportedCategory>(CATEGORY_OPTIONS);
 
+function requireFirestoreDb() {
+  if (db) {
+    return db;
+  }
+
+  const initializationError = getFirebaseInitializationError();
+  throw (
+    initializationError ??
+    new Error('Firebase Firestore client is unavailable in this environment.')
+  );
+}
+
 function isObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
@@ -60,7 +72,8 @@ function isRetryablePersistenceError(error: unknown): boolean {
 }
 
 async function persistUserDataWithRetry(uid: string, data: SavedUserDataSnapshot): Promise<void> {
-  const userRef = doc(db, USERS_COLLECTION, uid);
+  const firestoreDb = requireFirestoreDb();
+  const userRef = doc(firestoreDb, USERS_COLLECTION, uid);
 
   for (let attempt = 1; attempt <= MAX_PERSIST_RETRIES; attempt += 1) {
     try {
@@ -538,7 +551,8 @@ function sanitizeRemoteDocument(uid: string, value: unknown): UserDataDocument {
 }
 
 export async function loadUserData(uid: string): Promise<UserDataDocument | null> {
-  const userRef = doc(db, USERS_COLLECTION, uid);
+  const firestoreDb = requireFirestoreDb();
+  const userRef = doc(firestoreDb, USERS_COLLECTION, uid);
   const snapshot = await getDoc(userRef);
 
   if (!snapshot.exists()) {

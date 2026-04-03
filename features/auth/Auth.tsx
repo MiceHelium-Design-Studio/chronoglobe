@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, RootState } from '../../store/store';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../lib/firebase';
+import { auth, getFirebaseInitializationError } from '../../lib/firebase';
 import { setUser, setLoading, setError, logout } from '../../store/slices/authSlice';
 import { reportAuthError } from '../../lib/errorTracking';
 
@@ -16,6 +16,14 @@ export default function Auth() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
+    if (!auth) {
+      const initializationError = getFirebaseInitializationError();
+      dispatch(
+        setError(initializationError?.message ?? 'Authentication is unavailable.'),
+      );
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(
       auth,
       (user) => {
@@ -31,6 +39,15 @@ export default function Auth() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(setLoading(true));
+
+    if (!auth) {
+      const initializationError = getFirebaseInitializationError();
+      dispatch(
+        setError(initializationError?.message ?? 'Authentication is unavailable.'),
+      );
+      return;
+    }
+
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, email, password);
@@ -54,6 +71,14 @@ export default function Auth() {
   };
 
   const handleLogout = async () => {
+    if (!auth) {
+      const initializationError = getFirebaseInitializationError();
+      dispatch(
+        setError(initializationError?.message ?? 'Authentication is unavailable.'),
+      );
+      return;
+    }
+
     try {
       await signOut(auth);
       dispatch(logout());

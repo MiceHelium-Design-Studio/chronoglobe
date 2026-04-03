@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../lib/firebase';
+import { auth, getFirebaseInitializationError } from '../../lib/firebase';
 import { setError, logout } from '../../store/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
@@ -15,6 +15,14 @@ export function AppHeader({ minimal = false }: AppHeaderProps) {
   const user = useAppSelector((state) => state.auth.user);
 
   const handleSignOut = async () => {
+    if (!auth) {
+      const initializationError = getFirebaseInitializationError();
+      dispatch(
+        setError(initializationError?.message ?? 'Authentication is unavailable.'),
+      );
+      return;
+    }
+
     try {
       await signOut(auth);
       dispatch(logout());

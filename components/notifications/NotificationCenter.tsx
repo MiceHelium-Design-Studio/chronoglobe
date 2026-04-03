@@ -11,7 +11,7 @@ import {
   query,
   updateDoc,
 } from 'firebase/firestore';
-import { db } from '../../lib/firebase';
+import { db, getFirebaseInitializationError } from '../../lib/firebase';
 import { formatUtcTimestamp } from '../../lib/dateTime';
 import { NotificationChannel, UserNotification } from '../../types/notifications';
 
@@ -95,32 +95,54 @@ export function NotificationCenter({ uid }: NotificationCenterProps) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const notificationsRef = collection(db, 'users', uid, 'notifications');
-    const notificationsQuery = query(
-      notificationsRef,
-      orderBy('createdAt', 'desc'),
-      limit(MAX_NOTIFICATIONS),
-    );
+    if (!uid) {
+      setNotifications([]);
+      setLoading(false);
+      setError(null);
+      return;
+    }
 
-    const unsubscribe = onSnapshot(
-      notificationsQuery,
-      (snapshot) => {
-        const next = snapshot.docs
-          .map((docSnapshot) => mapNotification(docSnapshot.id, docSnapshot.data(), uid))
-          .filter((notification): notification is UserNotification => notification !== null);
+    if (!db) {
+      const initializationError = getFirebaseInitializationError();
+      setError(
+        initializationError?.message ?? 'Notifications are unavailable in this environment.',
+      );
+      setLoading(false);
+      return;
+    }
 
-        setNotifications(next);
-        setLoading(false);
-      },
-      () => {
-        setError('Failed to load notifications.');
-        setLoading(false);
-      },
-    );
+    try {
+      const notificationsRef = collection(db, 'users', uid, 'notifications');
+      const notificationsQuery = query(
+        notificationsRef,
+        orderBy('createdAt', 'desc'),
+        limit(MAX_NOTIFICATIONS),
+      );
 
-    return () => {
-      unsubscribe();
-    };
+      const unsubscribe = onSnapshot(
+        notificationsQuery,
+        (snapshot) => {
+          const next = snapshot.docs
+            .map((docSnapshot) => mapNotification(docSnapshot.id, docSnapshot.data(), uid))
+            .filter((notification): notification is UserNotification => notification !== null);
+
+          setNotifications(next);
+          setLoading(false);
+          setError(null);
+        },
+        () => {
+          setError('Failed to load notifications.');
+          setLoading(false);
+        },
+      );
+
+      return () => {
+        unsubscribe();
+      };
+    } catch {
+      setError('Failed to initialize notifications.');
+      setLoading(false);
+    }
   }, [uid]);
 
   const unreadCount = useMemo(
@@ -129,6 +151,11 @@ export function NotificationCenter({ uid }: NotificationCenterProps) {
   );
 
   const toggleRead = async (notification: UserNotification) => {
+    if (!db) {
+      setError('Notifications are unavailable in this environment.');
+      return;
+    }
+
     const notificationRef = doc(db, 'users', uid, 'notifications', notification.id);
     await updateDoc(notificationRef, {
       readAt: notification.readAt ? null : new Date().toISOString(),

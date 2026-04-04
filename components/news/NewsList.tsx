@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { clearNewsError, fetchNews, setFilters } from '../../store/slices/newsSlice';
 import { addBookmark, removeBookmark } from '../../store/slices/bookmarkSlice';
@@ -44,6 +44,7 @@ export default function NewsList({ className }: NewsListProps) {
   const [bookmarkGateOpen, setBookmarkGateOpen] = useState(false);
   const [advancedFiltersGateOpen, setAdvancedFiltersGateOpen] = useState(false);
   const [queryValidationError, setQueryValidationError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
   const { plan, entitlements, canAddBookmark } = useEntitlements();
   const { track } = useAnalytics();
 
@@ -99,6 +100,7 @@ export default function NewsList({ className }: NewsListProps) {
     };
 
     dispatch(fetchNews(searchPayload));
+    setHasSearched(true);
     dispatch(
       addRecentSearch({
         query,
@@ -113,6 +115,11 @@ export default function NewsList({ className }: NewsListProps) {
       from: searchPayload.from,
       to: searchPayload.to,
     });
+  };
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleFetchNews();
   };
 
   const handleBookmark = (article: NewsArticle) => {
@@ -158,10 +165,13 @@ export default function NewsList({ className }: NewsListProps) {
         </p>
       </div>
 
-      <div className="space-y-3 border-b border-white/10 p-4">
+      <form
+        className="space-y-3 border-b border-white/10 p-4"
+        onSubmit={handleSearchSubmit}
+      >
         <input
           type="text"
-          placeholder="Search keywords, locations, or topics"
+          placeholder="Search topics, cities, regions, or keywords"
           value={filters.q || ''}
           onChange={(e) => handleFilterChange('q', e.target.value)}
           className={`w-full rounded-md border bg-slate-950/80 px-3 py-2 text-sm ${
@@ -224,11 +234,12 @@ export default function NewsList({ className }: NewsListProps) {
         )}
 
         <button
-          onClick={handleFetchNews}
+          type="submit"
           className="w-full rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={!canSubmitSearch}
+          aria-busy={loading}
         >
-          {loading ? 'Searching...' : 'Search News'}
+          {loading ? 'Searching News...' : 'Search News'}
         </button>
 
         {advancedFiltersGateOpen && !entitlements.advancedFiltersEnabled && (
@@ -239,7 +250,7 @@ export default function NewsList({ className }: NewsListProps) {
             compact
           />
         )}
-      </div>
+      </form>
 
       {loading && <LoadingState />}
 
@@ -255,10 +266,21 @@ export default function NewsList({ className }: NewsListProps) {
         </div>
       )}
 
-      {!loading && !error && articles.length === 0 && (
+      {!loading && !error && hasSearched && articles.length === 0 && (
         <div className="mx-4 my-8 rounded-xl border border-white/10 bg-slate-950/40 p-6 text-center text-sm text-slate-300">
-          <p className="font-medium text-slate-100">No articles found yet.</p>
-          <p className="mt-1">Try broadening your query or clearing date filters.</p>
+          <p className="font-medium text-slate-100">No matching articles found.</p>
+          <p className="mt-1">
+            Try a broader topic, another location, or fewer filters.
+          </p>
+        </div>
+      )}
+
+      {!loading && !error && !hasSearched && articles.length === 0 && (
+        <div className="mx-4 my-8 rounded-xl border border-white/10 bg-slate-950/40 p-6 text-center text-sm text-slate-300">
+          <p className="font-medium text-slate-100">Start with a search.</p>
+          <p className="mt-1">
+            Use a topic, city, region, or keyword to load your first results.
+          </p>
         </div>
       )}
 

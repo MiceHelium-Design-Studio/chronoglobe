@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AtlasWire',
-  description: 'Real-time map-based intelligence for global news events.',
+  title: 'ChronoGlobe',
+  description: 'Real-time and historical intelligence platform for global events.',
 };
 
 export default async function RootLayout({

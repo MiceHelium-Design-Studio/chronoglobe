@@ -1,21 +1,22 @@
 'use client';
 
+import { Era } from '../../types/history';
+import { formatHistoricalYear } from '../../lib/timeline/formatHistoricalYear';
 import { KeyEventsList } from './KeyEventsList';
-import { HistoricalTimelineEntry } from '../../types/timeline';
 
 interface TimelineYearRailProps {
-  entries: HistoricalTimelineEntry[];
-  selectedId: string;
-  onSelect: (id: string) => void;
+  eras: Era[];
+  selectedYear: number;
+  onSelectYear: (year: number) => void;
 }
 
 export function TimelineYearRail({
-  entries,
-  selectedId,
-  onSelect,
+  eras,
+  selectedYear,
+  onSelectYear,
 }: TimelineYearRailProps) {
-  const selectedIndex = entries.findIndex((entry) => entry.id === selectedId);
-  const selectedEntry = entries[selectedIndex] ?? entries[0];
+  const selectedIndex = eras.findIndex((era) => era.year === selectedYear);
+  const selectedEra = eras[selectedIndex] ?? eras[eras.length - 1];
 
   return (
     <aside className="rounded-3xl border border-white/10 bg-slate-950/75 p-4 shadow-[0_32px_90px_-68px_rgba(59,130,246,0.95)]">
@@ -26,9 +27,9 @@ export function TimelineYearRail({
         <div className="relative pl-7">
           <span className="absolute left-[11px] top-0 h-full w-px bg-gradient-to-b from-cyan-400/70 via-slate-600 to-slate-700" />
           <ul className="space-y-2">
-            {entries.map((entry, index) => {
+            {eras.map((era, index) => {
               const distance = Math.abs(index - selectedIndex);
-              const active = entry.id === selectedId;
+              const active = era.year === selectedYear;
               const fadeClass =
                 distance === 0
                   ? 'opacity-100'
@@ -39,9 +40,9 @@ export function TimelineYearRail({
                       : 'opacity-40';
 
               return (
-                <li key={entry.id} className={fadeClass}>
+                <li key={era.slug} className={fadeClass}>
                   <button
-                    onClick={() => onSelect(entry.id)}
+                    onClick={() => onSelectYear(era.year)}
                     className={`relative w-full rounded-xl border px-3 py-2 text-left transition ${
                       active
                         ? 'border-cyan-400/45 bg-cyan-500/10'
@@ -58,9 +59,9 @@ export function TimelineYearRail({
                         active ? 'text-cyan-100' : 'text-slate-200'
                       }`}
                     >
-                      {entry.displayYear}
+                      {formatHistoricalYear(era.year)}
                     </p>
-                    <p className="text-[11px] text-slate-400">{entry.era}</p>
+                    <p className="text-[11px] text-slate-400">{era.eraLabel}</p>
                   </button>
                 </li>
               );
@@ -71,19 +72,19 @@ export function TimelineYearRail({
 
       <div className="mt-4 xl:hidden">
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {entries.map((entry) => {
-            const active = entry.id === selectedId;
+          {eras.map((era) => {
+            const active = era.year === selectedYear;
             return (
               <button
-                key={entry.id}
-                onClick={() => onSelect(entry.id)}
+                key={era.slug}
+                onClick={() => onSelectYear(era.year)}
                 className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-medium ${
                   active
                     ? 'border-cyan-400/45 bg-cyan-500/15 text-cyan-100'
                     : 'border-white/10 bg-slate-900/50 text-slate-300'
                 }`}
               >
-                {entry.displayYear}
+                {formatHistoricalYear(era.year)}
               </button>
             );
           })}
@@ -94,29 +95,31 @@ export function TimelineYearRail({
         <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
           Selected Year
         </p>
-        <p className="mt-1 text-2xl font-semibold text-slate-100">{selectedEntry.displayYear}</p>
-        <p className="text-xs uppercase tracking-[0.14em] text-amber-100/90">
-          {selectedEntry.era}
+        <p className="mt-1 text-2xl font-semibold text-slate-100">
+          {formatHistoricalYear(selectedEra.year)}
         </p>
-        <p className="mt-2 text-sm text-slate-300">{selectedEntry.summary}</p>
+        <p className="text-xs uppercase tracking-[0.14em] text-amber-100/90">
+          {selectedEra.eraLabel}
+        </p>
+        <p className="mt-2 text-sm text-slate-300">{selectedEra.description}</p>
       </div>
 
       <div className="mt-3 rounded-2xl border border-white/10 bg-slate-900/60 p-3">
-        <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">Notable Regions</p>
+        <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">Hotspots</p>
         <div className="mt-2 flex flex-wrap gap-2">
-          {selectedEntry.notableRegions.map((region) => (
+          {selectedEra.hotspots.map((spot) => (
             <span
-              key={region}
+              key={spot}
               className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2.5 py-1 text-xs text-cyan-100"
             >
-              {region}
+              {spot}
             </span>
           ))}
         </div>
       </div>
 
       <div className="mt-3">
-        <KeyEventsList events={selectedEntry.keyEvents} />
+        <KeyEventsList events={selectedEra.events.map((event) => event.title)} />
       </div>
 
       <button

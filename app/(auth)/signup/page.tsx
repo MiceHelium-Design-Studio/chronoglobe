@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { AppHeader } from '../../components/layout/AppHeader';
-import { auth, getFirebaseInitializationError } from '../../lib/firebase';
-import { useAnalytics } from '../../hooks/useAnalytics';
-import { reportAuthError } from '../../lib/errorTracking';
+import { AppHeader } from '../../../components/layout/AppHeader';
+import { auth, getFirebaseInitializationError } from '../../../lib/firebase';
+import { useAnalytics } from '../../../hooks/useAnalytics';
+import { reportAuthError } from '../../../lib/errorTracking';
 
 export default function Signup() {
   const router = useRouter();

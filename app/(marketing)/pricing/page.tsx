@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { AppHeader } from '../../components/layout/AppHeader';
-import { PLAN_DEFINITIONS } from '../../lib/entitlements';
-import { formatUtcTimestamp } from '../../lib/dateTime';
-import { useAnalytics } from '../../hooks/useAnalytics';
-import { useAppSelector } from '../../store/store';
-import { AppPlan } from '../../types/plans';
-import { useBillingActions } from '../../hooks/useBillingActions';
+import { AppHeader } from '../../../components/layout/AppHeader';
+import { PLAN_DEFINITIONS } from '../../../lib/entitlements';
+import { formatUtcTimestamp } from '../../../lib/dateTime';
+import { useAnalytics } from '../../../hooks/useAnalytics';
+import { useAppSelector } from '../../../store/store';
+import { AppPlan } from '../../../types/plans';
+import { useBillingActions } from '../../../hooks/useBillingActions';
 
 const plans = [
   PLAN_DEFINITIONS.free,

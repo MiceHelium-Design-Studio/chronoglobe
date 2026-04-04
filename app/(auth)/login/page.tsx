@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { AppHeader } from '../../components/layout/AppHeader';
-import { GoogleSignInButton } from '../../components/auth/GoogleSignInButton';
-import { auth, getFirebaseInitializationError } from '../../lib/firebase';
-import { useAnalytics } from '../../hooks/useAnalytics';
-import { reportAuthError } from '../../lib/errorTracking';
+import { AppHeader } from '../../../components/layout/AppHeader';
+import { GoogleSignInButton } from '../../../components/auth/GoogleSignInButton';
+import { auth, getFirebaseInitializationError } from '../../../lib/firebase';
+import { useAnalytics } from '../../../hooks/useAnalytics';
+import { reportAuthError } from '../../../lib/errorTracking';
 
 export default function Login() {
   const router = useRouter();

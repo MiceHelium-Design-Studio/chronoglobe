@@ -4,34 +4,34 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { UpgradePrompt } from '../../components/entitlements/UpgradePrompt';
-import NewsList from '../../components/news/NewsList';
-import FilterPanel from '../../components/filters/FilterPanel';
-import { NotificationCenter } from '../../components/notifications/NotificationCenter';
+import { UpgradePrompt } from '../../../components/entitlements/UpgradePrompt';
+import NewsList from '../../../components/news/NewsList';
+import FilterPanel from '../../../components/filters/FilterPanel';
+import { NotificationCenter } from '../../../components/notifications/NotificationCenter';
 import {
   CommandSection,
   CommandSidebar,
-} from '../../components/dashboard/CommandSidebar';
-import { CommandTopBar } from '../../components/dashboard/CommandTopBar';
-import { KpiCardsRow } from '../../components/dashboard/KpiCardsRow';
-import { IntelSummaryCards } from '../../components/dashboard/IntelSummaryCards';
-import { useEntitlements } from '../../hooks/useEntitlements';
-import { useAnalytics } from '../../hooks/useAnalytics';
-import { useBillingActions } from '../../hooks/useBillingActions';
-import { formatUtcTimestamp } from '../../lib/dateTime';
-import { CATEGORY_OPTIONS, SupportedCategory } from '../../types/preferences';
-import { toggleFollowedTopic } from '../../store/slices/preferencesSlice';
+} from '../../../components/dashboard/CommandSidebar';
+import { CommandTopBar } from '../../../components/dashboard/CommandTopBar';
+import { KpiCardsRow } from '../../../components/dashboard/KpiCardsRow';
+import { IntelSummaryCards } from '../../../components/dashboard/IntelSummaryCards';
+import { useEntitlements } from '../../../hooks/useEntitlements';
+import { useAnalytics } from '../../../hooks/useAnalytics';
+import { useBillingActions } from '../../../hooks/useBillingActions';
+import { formatUtcTimestamp } from '../../../lib/dateTime';
+import { CATEGORY_OPTIONS, SupportedCategory } from '../../../types/preferences';
+import { toggleFollowedTopic } from '../../../store/slices/preferencesSlice';
 import {
   addAlert,
   followRegionFromLocation,
   removeAlert,
   toggleAlertEnabled,
   unfollowRegion,
-} from '../../store/slices/watchlistSlice';
-import { setFilters } from '../../store/slices/newsSlice';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+} from '../../../store/slices/watchlistSlice';
+import { setFilters } from '../../../store/slices/newsSlice';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 
-const DynamicMap = dynamic(() => import('../../components/map/Map'), {
+const DynamicMap = dynamic(() => import('../../../components/map/Map'), {
   ssr: false,
   loading: () => (
     <div className="flex h-full min-h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-slate-900/70 text-slate-300">
@@ -274,7 +274,7 @@ export default function Dashboard() {
 
   if (!user) {
     return (
-      <main className="min-h-screen bg-[#04060c] text-slate-100">
+      <main className="text-slate-100">
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <p className="text-[10px] uppercase tracking-[0.24em] text-cyan-200/80">
             ChronoGlobe Command
@@ -304,7 +304,7 @@ export default function Dashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-[#04060c] text-slate-100">
+    <main className="relative text-slate-100">
       <div
         className="pointer-events-none absolute inset-0 opacity-70"
         style={{

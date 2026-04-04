@@ -14,6 +14,10 @@ export interface NewsArticle {
   source: NewsSource;
   author?: string | null;
   content?: string | null;
+  inferredRegion?: string;
+  inferredTopic?: string;
+  reliabilityScore?: number;
+  normalizedPublishedAt?: string;
 }
 
 export interface NewsFilters {
@@ -29,4 +33,18 @@ export interface NewsState {
   loading: boolean;
   error: string | null;
   filters: NewsFilters;
+}
+
+export interface UpstreamNewsArticle {
+  title?: string | null;
+  description?: string | null;
+  url?: string | null;
+  urlToImage?: string | null;
+  publishedAt?: string | null;
+  source?: {
+    id?: string | null;
+    name?: string | null;
+  } | null;
+  author?: string | null;
+  content?: string | null;
 }

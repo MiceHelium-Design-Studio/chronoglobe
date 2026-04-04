@@ -1,51 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getNewsApiEnv, validateNewsApiEnv } from '../../../lib/env';
+import { ingestNewsArticles } from '../../../lib/ingestion/news';
 import { takeRateLimitToken } from '../../../lib/rateLimit';
 import { serverLogger } from '../../../lib/serverLogger';
 import { captureExceptionWithContext } from '../../../lib/sentryContext';
-import {
-  toNewsApiSearchQuery,
-  ValidatedNewsQuery,
-  validateNewsQuery,
-} from '../../../lib/newsQuery';
-import { NewsArticle, NewsFilters } from '../../../types/news';
-
-validateNewsApiEnv();
-const newsApiEnv = getNewsApiEnv();
+import { ValidatedNewsQuery, validateNewsQuery } from '../../../lib/newsQuery';
+import { NewsFilters } from '../../../types/news';
+import { fetchNews } from '../../../services/news/fetchNews';
 
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60_000;
-const NEWS_API_EVERYTHING_URL = 'https://newsapi.org/v2/everything';
-
-interface NewsApiSource {
-  id?: string | null;
-  name?: string | null;
-}
-
-interface NewsApiArticle {
-  title?: string | null;
-  description?: string | null;
-  url?: string | null;
-  urlToImage?: string | null;
-  publishedAt?: string | null;
-  source?: NewsApiSource | null;
-  author?: string | null;
-  content?: string | null;
-}
-
-interface NewsApiSuccessResponse {
-  status: 'ok';
-  articles?: NewsApiArticle[];
-}
-
-interface NewsApiErrorResponse {
-  status: 'error';
-  code?: string;
-  message?: string;
-}
-
-type NewsApiResponse = NewsApiSuccessResponse | NewsApiErrorResponse;
-
 function getClientKey(request: NextRequest): string {
   const forwardedFor = request.headers.get('x-forwarded-for');
 
@@ -66,119 +30,28 @@ function getRequestId(request: NextRequest): string {
   return crypto.randomUUID();
 }
 
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
-}
-
-function toNewsApiResponse(value: unknown): NewsApiResponse | null {
-  if (!isObject(value) || typeof value.status !== 'string') {
-    return null;
-  }
-
-  if (value.status === 'ok') {
-    return {
-      status: 'ok',
-      articles: Array.isArray(value.articles)
-        ? (value.articles as NewsApiArticle[])
-        : [],
-    };
-  }
-
-  if (value.status === 'error') {
-    return {
-      status: 'error',
-      code: typeof value.code === 'string' ? value.code : undefined,
-      message: typeof value.message === 'string' ? value.message : undefined,
-    };
-  }
-
-  return null;
-}
-
-function toStringValue(value: unknown): string | null {
-  if (typeof value !== 'string') {
-    return null;
-  }
-
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : null;
-}
-
-function toNewsArticle(article: NewsApiArticle): NewsArticle | null {
-  const title = toStringValue(article.title);
-  const url = toStringValue(article.url);
-  const publishedAt = toStringValue(article.publishedAt);
-  const sourceName = toStringValue(article.source?.name);
-
-  if (!title || !url || !publishedAt || !sourceName) {
-    return null;
-  }
-
-  return {
-    title,
-    description: article.description ?? null,
-    url,
-    urlToImage: article.urlToImage ?? null,
-    publishedAt,
-    source: {
-      id: article.source?.id ?? null,
-      name: sourceName,
-    },
-    author: article.author ?? null,
-    content: article.content ?? null,
-  };
-}
-
 async function fetchNewsFromUpstream(query: ValidatedNewsQuery): Promise<{
-  articles: NewsArticle[];
+  articles: ReturnType<typeof ingestNewsArticles>['articles'];
   statusCode: number;
   upstreamCode?: string;
 }> {
-  const url = new URL(NEWS_API_EVERYTHING_URL);
-  url.searchParams.set('q', toNewsApiSearchQuery(query));
-  url.searchParams.set('language', query.language);
-  url.searchParams.set('sortBy', 'publishedAt');
-  url.searchParams.set('pageSize', '20');
+  validateNewsApiEnv();
+  const env = getNewsApiEnv();
+  const upstream = await fetchNews(query, env.NEWS_API_KEY);
 
-  if (query.from) {
-    url.searchParams.set('from', query.from);
-  }
-
-  if (query.to) {
-    url.searchParams.set('to', query.to);
-  }
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    cache: 'no-store',
-    headers: {
-      Accept: 'application/json',
-      'X-Api-Key': newsApiEnv.NEWS_API_KEY,
-    },
-  });
-
-  const json = (await response.json().catch(() => null)) as unknown;
-  const payload = toNewsApiResponse(json);
-
-  if (!payload) {
-    throw new Error(`News API returned an invalid response (HTTP ${response.status}).`);
-  }
-
-  if (!response.ok || payload.status === 'error') {
+  if (upstream.statusCode >= 400) {
     return {
       articles: [],
-      statusCode: response.status,
-      upstreamCode: payload.status === 'error' ? payload.code : undefined,
+      statusCode: upstream.statusCode,
+      upstreamCode: upstream.upstreamCode,
     };
   }
 
-  const articles = payload.articles
-    ?.map((article) => toNewsArticle(article))
-    .filter((article): article is NewsArticle => article !== null) ?? [];
+  const ingestion = ingestNewsArticles(upstream.articles);
 
   return {
-    articles,
-    statusCode: response.status,
+    articles: ingestion.articles,
+    statusCode: upstream.statusCode,
   };
 }
 

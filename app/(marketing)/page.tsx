@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { AppHeader } from '../components/layout/AppHeader';
-import { GoogleSignInButton } from '../components/auth/GoogleSignInButton';
+import { AppHeader } from '../../components/layout/AppHeader';
+import { GoogleSignInButton } from '../../components/auth/GoogleSignInButton';
 
 const features = [
   {
@@ -34,7 +34,7 @@ export default function Home() {
             Understand global events where they happen.
           </h1>
           <p className="mt-6 max-w-xl text-base text-slate-300 sm:text-lg">
-            AtlasWire combines live news search with map intelligence so teams can
+            ChronoGlobe combines live news search with map intelligence so teams can
             monitor regions, verify sources, and spot trends before they escalate.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">

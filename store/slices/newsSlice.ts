@@ -20,9 +20,13 @@ export const fetchNews = createAsyncThunk<
   { rejectValue: string }
 >('news/fetchNews', async (filters, { rejectWithValue }) => {
   try {
+    const normalizedFilters: NewsFilters = {
+      ...filters,
+      q: filters.q?.trim(),
+    };
     const queryParams = new URLSearchParams();
 
-    Object.entries(filters).forEach(([key, value]) => {
+    Object.entries(normalizedFilters).forEach(([key, value]) => {
       if (typeof value === 'string' && value.trim().length > 0) {
         queryParams.append(key, value);
       }
@@ -65,6 +69,9 @@ const newsSlice = createSlice({
     setFilters: (state, action: PayloadAction<Partial<NewsFilters>>) => {
       state.filters = { ...state.filters, ...action.payload };
     },
+    clearNewsError: (state) => {
+      state.error = null;
+    },
     clearArticles: (state) => {
       state.articles = [];
     },
@@ -86,5 +93,5 @@ const newsSlice = createSlice({
   },
 });
 
-export const { setFilters, clearArticles } = newsSlice.actions;
+export const { setFilters, clearNewsError, clearArticles } = newsSlice.actions;
 export default newsSlice.reducer;

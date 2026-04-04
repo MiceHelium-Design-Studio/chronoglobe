@@ -2,14 +2,13 @@
 
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchNews, setFilters } from '../../store/slices/newsSlice';
+import { clearNewsError, fetchNews, setFilters } from '../../store/slices/newsSlice';
 import { addBookmark, removeBookmark } from '../../store/slices/bookmarkSlice';
 import { addRecentSearch } from '../../store/slices/preferencesSlice';
 import { UpgradePrompt } from '../entitlements/UpgradePrompt';
 import { useEntitlements } from '../../hooks/useEntitlements';
 import { NewsArticle } from '../../types/news';
 import { CATEGORY_OPTIONS } from '../../types/preferences';
-import { useDebounce } from '../../hooks/useDebounce';
 import { useAnalytics } from '../../hooks/useAnalytics';
 
 interface NewsListProps {
@@ -44,10 +43,12 @@ export default function NewsList({ className }: NewsListProps) {
   const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [bookmarkGateOpen, setBookmarkGateOpen] = useState(false);
   const [advancedFiltersGateOpen, setAdvancedFiltersGateOpen] = useState(false);
+  const [queryValidationError, setQueryValidationError] = useState<string | null>(null);
   const { plan, entitlements, canAddBookmark } = useEntitlements();
   const { track } = useAnalytics();
 
-  const debouncedFilters = useDebounce(filters, 400);
+  const trimmedQuery = (filters.q ?? '').trim();
+  const canSubmitSearch = trimmedQuery.length > 0 && !loading;
 
   const handleFilterChange = (
     key: 'q' | 'category' | 'from' | 'to' | 'language',
@@ -63,28 +64,48 @@ export default function NewsList({ className }: NewsListProps) {
     }
 
     dispatch(setFilters({ [key]: value }));
+    if (key === 'q') {
+      if (error) {
+        dispatch(clearNewsError());
+      }
+
+      if (queryValidationError && value.trim().length > 0) {
+        setQueryValidationError(null);
+      }
+    }
     track('filter_usage', { filter: key, value });
   };
 
   const handleFetchNews = () => {
+    const query = (filters.q ?? '').trim();
+    if (query.length === 0) {
+      setQueryValidationError('Please enter a keyword, topic, or location.');
+      return;
+    }
+
+    if (error) {
+      dispatch(clearNewsError());
+    }
+    if (queryValidationError) {
+      setQueryValidationError(null);
+    }
+
     const searchPayload = {
-      ...debouncedFilters,
-      language: debouncedFilters.language || preferredLanguage,
-      from: entitlements.advancedFiltersEnabled ? debouncedFilters.from : '',
-      to: entitlements.advancedFiltersEnabled ? debouncedFilters.to : '',
+      ...filters,
+      q: query,
+      language: filters.language || preferredLanguage,
+      from: entitlements.advancedFiltersEnabled ? filters.from : '',
+      to: entitlements.advancedFiltersEnabled ? filters.to : '',
     };
-    const query = searchPayload.q?.trim() ?? '';
 
     dispatch(fetchNews(searchPayload));
-    if (query.length > 0) {
-      dispatch(
-        addRecentSearch({
-          query,
-          category: searchPayload.category || undefined,
-          createdAt: new Date().toISOString(),
-        }),
-      );
-    }
+    dispatch(
+      addRecentSearch({
+        query,
+        category: searchPayload.category || undefined,
+        createdAt: new Date().toISOString(),
+      }),
+    );
 
     track('search', {
       query,
@@ -143,8 +164,15 @@ export default function NewsList({ className }: NewsListProps) {
           placeholder="Search keywords, locations, or topics"
           value={filters.q || ''}
           onChange={(e) => handleFilterChange('q', e.target.value)}
-          className="w-full rounded-md border border-white/20 bg-slate-950/80 px-3 py-2 text-sm"
+          className={`w-full rounded-md border bg-slate-950/80 px-3 py-2 text-sm ${
+            queryValidationError
+              ? 'border-amber-400/80 focus-visible:outline-amber-300'
+              : 'border-white/20'
+          }`}
         />
+        {queryValidationError && (
+          <p className="text-xs text-amber-200">{queryValidationError}</p>
+        )}
 
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <select
@@ -198,7 +226,7 @@ export default function NewsList({ className }: NewsListProps) {
         <button
           onClick={handleFetchNews}
           className="w-full rounded-md bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
-          disabled={loading}
+          disabled={!canSubmitSearch}
         >
           {loading ? 'Searching...' : 'Search News'}
         </button>

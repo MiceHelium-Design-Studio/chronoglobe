@@ -87,62 +87,53 @@ function mapNotification(id: string, value: unknown, uid: string): UserNotificat
 
 interface NotificationCenterProps {
   uid: string;
+  className?: string;
 }
 
-export function NotificationCenter({ uid }: NotificationCenterProps) {
+export function NotificationCenter({ uid, className }: NotificationCenterProps) {
   const [notifications, setNotifications] = useState<UserNotification[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const firebaseInitializationError = getFirebaseInitializationError();
+  const unavailableMessage = !uid
+    ? 'Sign in to view notifications.'
+    : !db
+      ? (firebaseInitializationError?.message ??
+        'Notifications are unavailable in this environment.')
+      : null;
 
   useEffect(() => {
-    if (!uid) {
-      setNotifications([]);
-      setLoading(false);
-      setError(null);
+    if (!uid || !db) {
       return;
     }
 
-    if (!db) {
-      const initializationError = getFirebaseInitializationError();
-      setError(
-        initializationError?.message ?? 'Notifications are unavailable in this environment.',
-      );
-      setLoading(false);
-      return;
-    }
+    const notificationsRef = collection(db, 'users', uid, 'notifications');
+    const notificationsQuery = query(
+      notificationsRef,
+      orderBy('createdAt', 'desc'),
+      limit(MAX_NOTIFICATIONS),
+    );
 
-    try {
-      const notificationsRef = collection(db, 'users', uid, 'notifications');
-      const notificationsQuery = query(
-        notificationsRef,
-        orderBy('createdAt', 'desc'),
-        limit(MAX_NOTIFICATIONS),
-      );
+    const unsubscribe = onSnapshot(
+      notificationsQuery,
+      (snapshot) => {
+        const next = snapshot.docs
+          .map((docSnapshot) => mapNotification(docSnapshot.id, docSnapshot.data(), uid))
+          .filter((notification): notification is UserNotification => notification !== null);
 
-      const unsubscribe = onSnapshot(
-        notificationsQuery,
-        (snapshot) => {
-          const next = snapshot.docs
-            .map((docSnapshot) => mapNotification(docSnapshot.id, docSnapshot.data(), uid))
-            .filter((notification): notification is UserNotification => notification !== null);
+        setNotifications(next);
+        setLoading(false);
+        setError(null);
+      },
+      () => {
+        setError('Failed to load notifications.');
+        setLoading(false);
+      },
+    );
 
-          setNotifications(next);
-          setLoading(false);
-          setError(null);
-        },
-        () => {
-          setError('Failed to load notifications.');
-          setLoading(false);
-        },
-      );
-
-      return () => {
-        unsubscribe();
-      };
-    } catch {
-      setError('Failed to initialize notifications.');
-      setLoading(false);
-    }
+    return () => {
+      unsubscribe();
+    };
   }, [uid]);
 
   const unreadCount = useMemo(
@@ -163,7 +154,7 @@ export function NotificationCenter({ uid }: NotificationCenterProps) {
   };
 
   return (
-    <section className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
+    <section className={`${className} rounded-2xl border border-white/10 bg-slate-900/60 p-4`}>
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-lg font-semibold">Notification Center</h3>
         <span className="rounded-full border border-cyan-400/40 bg-cyan-500/10 px-2 py-0.5 text-xs text-cyan-200">
@@ -171,15 +162,16 @@ export function NotificationCenter({ uid }: NotificationCenterProps) {
         </span>
       </div>
 
+      {unavailableMessage && <p className="mt-2 text-sm text-slate-400">{unavailableMessage}</p>}
       {loading && <p className="mt-2 text-sm text-slate-400">Loading notifications...</p>}
       {error && <p className="mt-2 text-sm text-rose-300">{error}</p>}
-      {!loading && !error && notifications.length === 0 && (
+      {!unavailableMessage && !loading && !error && notifications.length === 0 && (
         <p className="mt-2 text-sm text-slate-400">
           No notifications yet. Alert matches will appear here.
         </p>
       )}
 
-      {notifications.length > 0 && (
+      {!unavailableMessage && notifications.length > 0 && (
         <ul className="mt-3 space-y-2">
           {notifications.map((notification) => (
             <li

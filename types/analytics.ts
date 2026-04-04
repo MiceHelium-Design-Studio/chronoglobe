@@ -1,8 +1,8 @@
 import { NewsArticle } from './news';
 
 export type AnalyticsEventMap = {
-  login: { method: 'email'; uid: string };
-  signup: { method: 'email'; uid: string };
+  login: { method: 'email' | 'google'; uid: string };
+  signup: { method: 'email' | 'google'; uid: string };
   search: { query: string; category?: string; from?: string; to?: string };
   bookmark: { action: 'add' | 'remove'; articleUrl: string; articleTitle: string };
   article_click: { articleUrl: string; articleTitle: string; source: string; location: 'modal' | 'external' };

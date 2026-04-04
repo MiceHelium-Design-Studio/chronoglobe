@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { AppHeader } from '../components/layout/AppHeader';
+import { GoogleSignInButton } from '../components/auth/GoogleSignInButton';
 
 const features = [
   {
@@ -49,6 +50,11 @@ export default function Home() {
             >
               Sign Up
             </Link>
+          </div>
+          <div className="mt-3 w-full max-w-xs">
+            <GoogleSignInButton
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-white/20 bg-white px-5 py-3 font-semibold text-slate-900 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
+            />
           </div>
         </div>
 

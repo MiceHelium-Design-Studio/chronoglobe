@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { AppHeader } from '../../components/layout/AppHeader';
+import { GoogleSignInButton } from '../../components/auth/GoogleSignInButton';
 import { auth, getFirebaseInitializationError } from '../../lib/firebase';
 import { useAnalytics } from '../../hooks/useAnalytics';
 import { reportAuthError } from '../../lib/errorTracking';
@@ -91,6 +92,14 @@ export default function Login() {
               {submitting ? 'Signing in...' : 'Log in'}
             </button>
           </form>
+
+          <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-wide text-slate-500">
+            <span className="h-px flex-1 bg-white/10" />
+            <span>or</span>
+            <span className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <GoogleSignInButton />
 
           <p className="mt-4 text-sm text-slate-300">
             New here?{' '}

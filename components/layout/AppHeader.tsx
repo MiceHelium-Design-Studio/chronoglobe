@@ -44,6 +44,9 @@ export function AppHeader({ minimal = false }: AppHeaderProps) {
           <Link href="/dashboard" className="hover:text-white">
             Dashboard
           </Link>
+          <Link href="/timeline" className="hover:text-white">
+            Timeline
+          </Link>
           <Link href="/pricing" className="hover:text-white">
             Pricing
           </Link>
